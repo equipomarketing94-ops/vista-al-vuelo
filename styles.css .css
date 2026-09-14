@@ -1,0 +1,393 @@
+/* ============================================================
+   VISTA AL VUELO — styles.css
+   Idea de diseño: "hora dorada". Negro = la silueta del valle
+   al anochecer; naranja = el atardecer por el que la gente sube.
+   Escrito mobile-first: primero el celular, luego se agranda
+   con @media (min-width: ...).
+   ============================================================ */
+
+/* -------- 1. VARIABLES (la paleta en un solo lugar) --------
+   Cambia un color aquí y se actualiza en toda la página. */
+:root {
+  --naranja:        #F2681C;  /* naranja principal (atardecer) */
+  --naranja-claro:  #FF8A3D;  /* naranja para hover / brillos  */
+  --negro:          #000000;  /* negro puro (protagonista)     */
+  --carbon:         #17120E;  /* casi negro cálido (madera)    */
+  --hueso:          #F6F0E6;  /* blanco cálido para respirar   */
+  --verde:          #3F6E3A;  /* verde natural (acento)        */
+  --cafe:           #6E4A2A;  /* café / tierra (acento)        */
+
+  --texto-claro:    #EDE6DB;  /* texto sobre fondo oscuro      */
+  --texto-tenue:    #B8AE9F;  /* texto secundario en oscuro    */
+  --texto-osc:      #1B1712;  /* texto sobre fondo claro       */
+  --texto-osc-2:    #5A5147;  /* texto secundario en claro     */
+
+  --borde:          rgba(255,255,255,0.14);
+  --radio:          14px;     /* redondeo estándar             */
+  --ancho-max:      1160px;   /* ancho máximo del contenido    */
+  --transicion:     .2s ease;
+}
+
+/* -------- 2. RESET / BASES -------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+* { margin: 0; }
+
+html { scroll-behavior: smooth; }         /* scroll suave al hacer clic en el menú */
+/* deja espacio arriba para que el header fijo no tape los títulos al anclar */
+section[id] { scroll-margin-top: 80px; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  color: var(--texto-osc);
+  background: var(--negro);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img { display: block; max-width: 100%; height: auto; }
+a { color: inherit; text-decoration: none; }
+
+/* Contenedor centrado con márgenes laterales */
+.container {
+  width: 100%;
+  max-width: var(--ancho-max);
+  margin-inline: auto;
+  padding-inline: 20px;
+}
+
+/* -------- 3. TIPOGRAFÍA -------- */
+h1, h2, h3 { font-family: 'Fraunces', Georgia, serif; line-height: 1.1; font-weight: 900; }
+
+.section-title {
+  font-size: clamp(1.8rem, 5vw, 2.7rem);  /* crece con la pantalla */
+  margin-bottom: .6rem;
+}
+
+.section-lead {
+  font-size: 1.05rem;
+  color: var(--texto-osc-2);
+  max-width: 46ch;                          /* líneas cómodas de leer */
+  margin-bottom: 1.6rem;
+}
+.section-dark .section-lead { color: var(--texto-tenue); }
+
+/* Etiqueta pequeña sobre algunos títulos (kicker) */
+.kicker {
+  display: inline-block;
+  font-weight: 600;
+  font-size: .82rem;
+  letter-spacing: .02em;
+  color: var(--verde);
+  margin-bottom: .5rem;
+}
+.kicker-orange { color: var(--naranja); }
+.section-dark .kicker { color: var(--naranja-claro); }
+
+/* -------- 4. BOTONES -------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .5rem;
+  padding: .8rem 1.5rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: .98rem;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform var(--transicion), background var(--transicion), color var(--transicion);
+}
+.btn:active { transform: translateY(1px); }
+
+.btn-primary {
+  background: var(--naranja);
+  color: #fff;
+}
+.btn-primary:hover { background: var(--naranja-claro); }
+
+.btn-outline {
+  background: transparent;
+  color: var(--texto-claro);
+  border-color: var(--borde);
+}
+.btn-outline:hover { border-color: var(--naranja); color: var(--naranja-claro); }
+.section-light .btn-outline { color: var(--texto-osc); border-color: rgba(0,0,0,.2); }
+.section-light .btn-outline:hover { border-color: var(--naranja); color: var(--naranja); }
+
+.btn-sm { padding: .55rem 1.1rem; font-size: .9rem; }
+.btn-lg { padding: 1rem 2rem; font-size: 1.05rem; }
+.btn-block { width: 100%; }
+
+.link-orange { color: var(--naranja); font-weight: 600; }
+.link-orange:hover { text-decoration: underline; }
+
+/* Foco visible para navegación con teclado (accesibilidad) */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 3px solid var(--naranja-claro);
+  outline-offset: 2px;
+}
+
+/* -------- 5. HEADER / NAV (fijo arriba) -------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(0,0,0,0.85);
+  backdrop-filter: blur(8px);              /* efecto vidrio esmerilado */
+  border-bottom: 1px solid var(--borde);
+  transition: background var(--transicion);
+}
+/* clase que agrega el JS al hacer scroll */
+.site-header.scrolled { background: rgba(0,0,0,0.96); }
+
+.nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 68px;
+}
+
+.brand { display: flex; flex-direction: column; line-height: 1.1; color: #fff; }
+.brand-name { font-family: 'Fraunces', serif; font-weight: 900; font-size: 1.3rem; }
+.brand-tag  { font-size: .72rem; color: var(--naranja-claro); letter-spacing: .04em; }
+
+/* Menú: en celular se oculta y baja desde arriba al tocar la hamburguesa */
+.nav-menu {
+  position: absolute;
+  top: 68px;
+  left: 0;
+  right: 0;
+  background: rgba(0,0,0,0.97);
+  border-bottom: 1px solid var(--borde);
+  display: flex;
+  flex-direction: column;
+  padding: 12px 20px 22px;
+  gap: 6px;
+  transform: translateY(-140%);            /* escondido arriba */
+  transition: transform .3s ease;
+}
+.nav-menu.open { transform: translateY(0); }/* visible */
+.nav-menu a { color: var(--texto-claro); padding: 10px 4px; font-weight: 500; }
+.nav-menu a:hover { color: var(--naranja-claro); }
+.nav-menu .btn { margin-top: 6px; color: #fff; }
+
+/* Hamburguesa */
+.nav-toggle {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px; height: 44px;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+.nav-toggle-bar {
+  height: 2px; width: 26px;
+  background: #fff;
+  transition: transform .25s ease, opacity .25s ease;
+}
+/* animación a "X" cuando el menú está abierto */
+.nav-toggle.open .nav-toggle-bar:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-toggle.open .nav-toggle-bar:nth-child(2) { opacity: 0; }
+.nav-toggle.open .nav-toggle-bar:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* -------- 6. HERO -------- */
+.hero {
+  position: relative;
+  min-height: 88vh;
+  display: flex;
+  align-items: center;
+  color: var(--texto-claro);
+  /* Fondo por defecto: degradado "atardecer" (se ve bien sin foto).
+     REEMPLAZAR por tu foto añadiendo la línea background-image debajo:
+     background-image: url('img/hero.jpg');
+     background-size: cover; background-position: center; */
+  background:
+    radial-gradient(120% 90% at 70% 15%, rgba(242,104,28,0.55) 0%, rgba(242,104,28,0) 55%),
+    linear-gradient(180deg, #2a1305 0%, #120a05 55%, #000 100%);
+  background-size: cover;
+  background-position: center;
+}
+/* capa oscura para que el texto siempre se lea sobre la foto */
+.hero-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,.25) 0%, rgba(0,0,0,.55) 100%);
+}
+.hero-content { position: relative; padding-block: 90px; max-width: 640px; }
+.hero-kicker { color: var(--naranja-claro); font-weight: 600; margin-bottom: .8rem; }
+.hero-title {
+  font-size: clamp(2.6rem, 9vw, 4.6rem);
+  margin-bottom: 1rem;
+}
+.hero-sub { font-size: 1.15rem; color: var(--texto-claro); margin-bottom: 2rem; max-width: 52ch; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+/* -------- 7. SECCIONES (base y variantes de color) -------- */
+.section { padding-block: 72px; }
+.section-light { background: var(--hueso); color: var(--texto-osc); }
+.section-dark  { background: var(--carbon); color: var(--texto-claro); }
+.section-head { margin-bottom: 2.2rem; }
+
+/* -------- 8. HISTORIA -------- */
+.historia-grid { display: grid; gap: 32px; grid-template-columns: 1fr; }
+.historia-text p { margin-bottom: 1rem; color: var(--texto-osc-2); }
+.historia-features { list-style: none; padding: 0; margin-top: 1.2rem; }
+.historia-features li { display: flex; align-items: center; gap: .6rem; padding: .35rem 0; font-weight: 500; color: var(--texto-osc); }
+.dot { width: 9px; height: 9px; border-radius: 50%; background: var(--naranja); flex: none; }
+
+/* Placeholder de imagen reutilizable */
+.media-placeholder,
+.gallery-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: .4rem;
+  min-height: 240px;
+  border-radius: var(--radio);
+  color: var(--cafe);
+  background: repeating-linear-gradient(45deg, #efe6d6 0 14px, #eadfcb 14px 28px);
+  border: 1px dashed rgba(110,74,42,.4);
+  text-align: center;
+}
+.media-icon { font-size: 1.8rem; }
+.media-label { font-size: .82rem; color: var(--texto-osc-2); }
+.media-img { border-radius: var(--radio); width: 100%; object-fit: cover; }
+
+/* -------- 9. CARTA -------- */
+.carta-inner { text-align: center; max-width: 620px; margin-inline: auto; }
+.carta-inner .section-lead { margin-inline: auto; }
+
+/* -------- 10. GALERÍA -------- */
+.gallery {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(2, 1fr);   /* 2 columnas en celular */
+}
+.gallery-item { min-height: 150px; }
+.gallery-img { min-height: 150px; height: 100%; }
+
+/* -------- 11. RESERVAS -------- */
+.section-reservas { background: var(--hueso); }
+.reservas-grid { display: grid; gap: 32px; grid-template-columns: 1fr; }
+.reservas-help { margin-top: 1rem; color: var(--texto-osc-2); }
+
+.reserva-form {
+  background: #fff;
+  border: 1px solid rgba(0,0,0,.08);
+  border-radius: var(--radio);
+  padding: 24px;
+  box-shadow: 0 18px 40px -24px rgba(0,0,0,.35);
+}
+.field { margin-bottom: 16px; display: flex; flex-direction: column; gap: 6px; }
+.field label { font-size: .9rem; font-weight: 600; color: var(--texto-osc); }
+.field input,
+.field textarea {
+  font: inherit;
+  padding: .7rem .85rem;
+  border: 1.5px solid #d9d1c4;
+  border-radius: 10px;
+  background: #fdfbf7;
+  color: var(--texto-osc);
+}
+.field input:focus,
+.field textarea:focus { border-color: var(--naranja); }
+.field-row { display: grid; grid-template-columns: 1fr; gap: 14px; }
+
+.form-feedback { margin-top: 12px; font-weight: 600; min-height: 1.2em; }
+.form-feedback.ok    { color: var(--verde); }
+.form-feedback.info  { color: var(--cafe); }
+
+/* -------- 12. UBICACIÓN -------- */
+.ubicacion-grid { display: grid; gap: 28px; grid-template-columns: 1fr; align-items: center; }
+.map-embed { border-radius: var(--radio); overflow: hidden; border: 1px solid var(--borde); }
+.map-embed iframe { width: 100%; height: 320px; border: 0; display: block; }
+
+/* -------- 13. FOOTER -------- */
+.site-footer { background: var(--negro); color: var(--texto-claro); padding-top: 56px; }
+.footer-grid { display: grid; gap: 32px; grid-template-columns: 1fr; padding-bottom: 40px; }
+.footer-brand .brand-name { color: #fff; font-size: 1.4rem; }
+.footer-brand p { color: var(--texto-tenue); margin-top: .6rem; max-width: 40ch; }
+.footer-heading { font-weight: 700; margin-bottom: .8rem; color: #fff; }
+.footer-contact a:hover { color: var(--naranja-claro); }
+.footer-contact p { color: var(--texto-tenue); margin-bottom: .3rem; }
+
+.social-icons { display: flex; gap: 12px; }
+.social-icons a {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 42px; height: 42px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.06);
+  border: 1px solid var(--borde);
+  color: var(--texto-claro);
+  transition: background var(--transicion), color var(--transicion), transform var(--transicion);
+}
+.social-icons a:hover { background: var(--naranja); color: #fff; transform: translateY(-2px); }
+
+.footer-bottom { border-top: 1px solid var(--borde); padding-block: 20px; }
+.footer-bottom p { color: var(--texto-tenue); font-size: .85rem; text-align: center; }
+
+/* -------- 14. BOTÓN FLOTANTE DE WHATSAPP -------- */
+.whatsapp-float {
+  position: fixed;
+  right: 18px; bottom: 18px;
+  z-index: 60;
+  width: 56px; height: 56px;
+  display: flex; align-items: center; justify-content: center;
+  background: #25D366;                      /* verde oficial de WhatsApp */
+  color: #fff;
+  border-radius: 50%;
+  box-shadow: 0 10px 24px -6px rgba(0,0,0,.5);
+  transition: transform var(--transicion);
+}
+.whatsapp-float:hover { transform: scale(1.06); }
+
+/* ============================================================
+   15. RESPONSIVE — de tablet en adelante (min-width: 768px)
+   ============================================================ */
+@media (min-width: 768px) {
+  .section { padding-block: 96px; }
+
+  /* El menú deja de ser desplegable y se muestra en línea */
+  .nav-toggle { display: none; }
+  .nav-menu {
+    position: static;
+    transform: none;
+    flex-direction: row;
+    align-items: center;
+    gap: 26px;
+    background: transparent;
+    border: 0;
+    padding: 0;
+  }
+  .nav-menu .btn { margin-top: 0; }
+
+  /* Historia y ubicación a dos columnas */
+  .historia-grid { grid-template-columns: 1.1fr .9fr; align-items: center; }
+  .ubicacion-grid { grid-template-columns: 1fr 1.2fr; }
+
+  /* Galería a 3 columnas */
+  .gallery { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .gallery-item, .gallery-img { min-height: 200px; }
+
+  /* Reservas: intro a la izquierda, formulario a la derecha */
+  .reservas-grid { grid-template-columns: .9fr 1.1fr; align-items: start; }
+  .field-row { grid-template-columns: 1fr 1fr 1fr; }
+
+  /* Footer en tres columnas */
+  .footer-grid { grid-template-columns: 1.4fr 1fr 1fr; }
+
+  .map-embed iframe { height: 380px; }
+}
+
+/* Respeta a quien prefiere menos movimiento (accesibilidad) */
+@media (prefers-reduced-motion: reduce) {
+  * { scroll-behavior: auto !important; transition: none !important; }
+}
