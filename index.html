@@ -5,8 +5,8 @@
   Pon tus imágenes en la carpeta img/ con estos nombres EXACTOS:
     logo.png · hero-lateral.jpg · historia.jpg
     galeria-1.jpg ... galeria-6.jpg
-  (Opcional: hero.jpg como fondo del hero — ver comentario en .hero)
-  Para publicar, renombra este archivo a index.html
+  La carta debe estar en: img/carta.pdf
+  Para publicar, este archivo debe llamarse index.html
   ============================================================
 -->
 <html lang="es">
@@ -293,7 +293,8 @@
       </button>
       <nav class="nav-menu" id="navMenu">
         <a href="#historia">Historia</a>
-        <a href="#carta">Carta</a>
+        <!-- "Carta" ahora abre el PDF directo (antes bajaba a la sección) -->
+        <a href="img/carta.pdf" target="_blank" rel="noopener">Carta</a>
         <a href="#galeria">Lugar</a>
         <a href="#ubicacion">Ubicación</a>
       </nav>
@@ -317,7 +318,8 @@
             paisaje que enamora. Sube, respira y quédate a ver el atardecer.
           </p>
           <div class="hero-actions">
-            <a href="#carta" class="btn btn-outline">Ver la carta</a>
+            <!-- "Ver la carta" ahora abre el PDF directo (antes bajaba a la sección) -->
+            <a href="img/carta.pdf" target="_blank" rel="noopener" class="btn btn-outline">Ver la carta</a>
           </div>
         </div>
 
@@ -361,7 +363,7 @@
           Platos para compartir, cócteles de la casa y algo dulce para cerrar.
           Mira la carta completa antes de subir.
         </p>
-        <!-- REEMPLAZAR href="#" por el link o PDF de tu carta -->
+        <!-- Abre el PDF de la carta -->
         <a href="img/carta.pdf" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Ver la carta completa</a>
       </div>
     </section>
@@ -499,7 +501,7 @@
     </div>
   </footer>
 
-  <!-- Botón flotante RESERVAR (naranja, abajo a la izquierda) -->
+  <!-- Botón flotante RESERVAR (naranja, abajo a la izquierda) -> baja a #reservas -->
   <a href="#reservas" class="reservar-float" aria-label="Reservar tu mesa">
     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2"></rect><path d="M3 9h18M8 2.5v4M16 2.5v4"></path></svg>
     <span>Reservar</span>
