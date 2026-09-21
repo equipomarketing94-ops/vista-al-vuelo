@@ -713,6 +713,7 @@
   <script>
     /* Link único de WhatsApp para todos los botones que lo usen */
     var WHATSAPP_LINK = "https://wa.me/message/UOFPKISRPHP3N1";
+    var URL_RESERVAS = "https://script.google.com/macros/s/AKfycbyKQKO0MEmia1t9V5P3D4cHUmFyBj2vSF7YENwP92emAmf9ctRuDKlBSGbOmmADnI6-6A/exec";
 
     document.addEventListener("DOMContentLoaded", function () {
 
@@ -753,16 +754,52 @@
         });
       });
 
-      /* Formulario (Fase 1: aún no envía. Fase 2: conectamos a Google) */
-      var form = document.getElementById("reservaForm");
+       /* Formulario Fase 2: envía a Google Apps Script (Sheets + correo + Calendar) */
+       var form = document.getElementById("reservaForm");
       var feedback = document.getElementById("formFeedback");
+      var submitBtn = form.querySelector("button[type='submit']");
+
       form.addEventListener("submit", function (e) {
         e.preventDefault();
         if (!form.checkValidity()) { form.reportValidity(); return; }
-        feedback.textContent = "¡Gracias! Pronto activamos el envío automático. Por ahora, reserva por WhatsApp 👉";
-        feedback.className = "form-feedback info";
-      });
 
+        // Estado: enviando
+        submitBtn.disabled = true;
+        submitBtn.textContent = "Enviando...";
+        feedback.textContent = "";
+        feedback.className = "form-feedback";
+
+        // Recolectar los datos del formulario
+        var datos = {
+          nombre:   document.getElementById("nombre").value,
+          telefono: document.getElementById("telefono").value,
+          correo:   document.getElementById("correo").value,
+          fecha:    document.getElementById("fecha").value,
+          hora:     document.getElementById("hora").value,
+          personas: document.getElementById("personas").value,
+          mensaje:  document.getElementById("mensaje").value
+        };
+
+        // Enviar a Google Apps Script
+        fetch(URL_RESERVAS, {
+          method: "POST",
+          mode: "no-cors", // Google exige esto; no podemos leer la respuesta pero el envío llega
+          body: JSON.stringify(datos)
+        })
+        .then(function () {
+          feedback.textContent = "¡Gracias! Recibimos tu reserva. Te confirmamos por WhatsApp pronto.";
+          feedback.className = "form-feedback ok";
+          form.reset();
+        })
+        .catch(function () {
+          feedback.textContent = "Ups, no se pudo enviar. Intenta por WhatsApp 👉";
+          feedback.className = "form-feedback info";
+        })
+        .finally(function () {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Enviar reserva";
+        });
+      });
       /* Año automático */
       var year = document.getElementById("year");
       if (year) year.textContent = new Date().getFullYear();
