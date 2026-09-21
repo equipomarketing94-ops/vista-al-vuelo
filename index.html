@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <!--
   ============================================================
-  VISTA AL VUELO — Landing (TODO EN UNO, con fotos conectadas)
-  Pon tus imágenes en la carpeta img/ con estos nombres EXACTOS:
-    logo.png · hero-lateral.jpg · historia.jpg
-    galeria-1.jpg ... galeria-6.jpg
-  La carta debe estar en: img/carta.pdf
-  Para publicar, este archivo debe llamarse index.html
+  VISTA AL VUELO — Landing (TODO EN UNO)
+  Estructura de carpeta esperada:
+    index.html  (este archivo)
+    img/
+      logo.png · hero-lateral.jpg · historia.jpg
+      galeria-1.jpg ... galeria-6.jpg
+      carta.pdf
+  Busca "PENDIENTE" con Cmd+F para completar dirección, horario y Facebook.
   ============================================================
 -->
 <html lang="es">
@@ -21,7 +23,6 @@
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
   <style>
-    /* -------- VARIABLES (paleta en un solo lugar) -------- */
     :root {
       --naranja:        #F2681C;
       --naranja-claro:  #FF8A3D;
@@ -40,7 +41,6 @@
       --transicion:     .2s ease;
     }
 
-    /* -------- RESET / BASES -------- */
     *, *::before, *::after { box-sizing: border-box; }
     * { margin: 0; }
     html { scroll-behavior: smooth; }
@@ -56,23 +56,18 @@
     a { color: inherit; text-decoration: none; }
 
     .container {
-      width: 100%;
-      max-width: var(--ancho-max);
-      margin: 0 auto;
-      padding-left: 20px;
-      padding-right: 20px;
+      width: 100%; max-width: var(--ancho-max);
+      margin: 0 auto; padding-left: 20px; padding-right: 20px;
     }
 
-    /* -------- TIPOGRAFÍA -------- */
-    h1, h2, h3 { font-family: 'Fraunces', Georgia, serif; line-height: 1.1; font-weight: 900; }
+    h1, h2, h3 { font-family: 'Fraunces', Georgia, serif; line-height: 1.15; font-weight: 900; }
     .section-title { font-size: 2rem; font-size: clamp(1.8rem, 5vw, 2.7rem); margin-bottom: .6rem; }
-    .section-lead { font-size: 1.05rem; color: var(--texto-osc-2); max-width: 46ch; margin-bottom: 1.6rem; }
+    .section-lead { font-size: 1.05rem; color: var(--texto-osc-2); max-width: 60ch; margin-bottom: 1.6rem; }
     .section-dark .section-lead { color: var(--texto-tenue); }
     .kicker { display: inline-block; font-weight: 600; font-size: .82rem; letter-spacing: .02em; color: var(--verde); margin-bottom: .5rem; }
     .kicker-orange { color: var(--naranja); }
     .section-dark .kicker { color: var(--naranja-claro); }
 
-    /* -------- BOTONES -------- */
     .btn {
       display: inline-flex; align-items: center; justify-content: center;
       padding: .8rem 1.5rem; border-radius: 999px;
@@ -94,7 +89,7 @@
 
     a:focus, button:focus, input:focus, textarea:focus { outline: 3px solid var(--naranja-claro); outline-offset: 2px; }
 
-    /* -------- HEADER / NAV -------- */
+    /* HEADER */
     .site-header {
       position: -webkit-sticky; position: sticky; top: 0; z-index: 50;
       background: rgba(0,0,0,0.88);
@@ -127,14 +122,10 @@
     .nav-toggle.open .nav-toggle-bar:nth-child(2) { opacity: 0; }
     .nav-toggle.open .nav-toggle-bar:nth-child(3) { -webkit-transform: translateY(-7px) rotate(-45deg); transform: translateY(-7px) rotate(-45deg); }
 
-    /* -------- HERO -------- */
+    /* HERO */
     .hero {
       position: relative;
       display: flex; align-items: center; color: var(--texto-claro);
-      /* Para foto de fondo del hero, descomenta y usa img/hero.jpg:
-         background-image:
-           linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)),
-           url('img/hero.jpg'); */
       background:
         radial-gradient(120% 90% at 70% 15%, rgba(242,104,28,0.55) 0%, rgba(242,104,28,0) 55%),
         linear-gradient(180deg, #2a1305 0%, #120a05 55%, #000 100%);
@@ -149,19 +140,17 @@
     }
     .hero-content { max-width: 640px; }
     .hero-logo-img { height: 110px; width: auto; margin-bottom: 22px; }
-
     .hero-kicker { color: var(--naranja-claro); font-weight: 600; margin-bottom: .8rem; }
-    .hero-title { font-size: 3rem; font-size: clamp(2.6rem, 8vw, 4.4rem); margin-bottom: 1rem; }
-    .hero-sub { font-size: 1.15rem; color: var(--texto-claro); margin-bottom: 2rem; max-width: 52ch; }
+    .hero-title { font-size: 3rem; font-size: clamp(2.4rem, 7vw, 4rem); margin-bottom: 1rem; }
+    .hero-sub { font-size: 1.2rem; color: var(--texto-claro); margin-bottom: 2rem; max-width: 56ch; }
     .hero-actions { display: flex; flex-wrap: wrap; }
     .hero-actions .btn { margin-right: 12px; margin-bottom: 12px; }
-
     .hero-photo {
       width: 100%; height: 100%; min-height: 300px; object-fit: cover;
       border-radius: 20px; box-shadow: 0 34px 70px -34px rgba(242,104,28,.55);
     }
 
-    /* -------- SECCIONES + TEXTURAS -------- */
+    /* SECCIONES + TEXTURAS */
     .section { padding-top: 72px; padding-bottom: 72px; }
     .section-dark {
       background-color: var(--carbon);
@@ -179,23 +168,99 @@
     }
     .section-head { margin-bottom: 2.2rem; }
 
-    /* -------- HISTORIA -------- */
+    /* HISTORIA */
     .historia-grid { display: grid; grid-gap: 32px; grid-template-columns: 1fr; }
     .historia-text p { margin-bottom: 1rem; color: var(--texto-osc-2); }
-    .historia-features { list-style: none; padding: 0; margin-top: 1.2rem; }
-    .historia-features li { display: flex; align-items: center; padding: .35rem 0; font-weight: 500; color: var(--texto-osc); }
-    .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--naranja); flex: none; margin-right: .6rem; }
     .media-img { border-radius: var(--radio); width: 100%; min-height: 260px; object-fit: cover; }
 
-    /* -------- CARTA -------- */
+    /* VISTA (sección con tarjetas) */
+    .vista-cards {
+      display: grid; grid-gap: 18px;
+      grid-template-columns: 1fr; margin-top: 2rem;
+    }
+    .card {
+      background: rgba(255,255,255,.04);
+      border: 1px solid var(--borde);
+      border-radius: var(--radio);
+      padding: 24px;
+    }
+    .card h3 {
+      font-size: 1.35rem; margin-bottom: .5rem;
+      color: var(--naranja-claro);
+    }
+    .card p { color: var(--texto-tenue); }
+    .card-icon {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(242,104,28,.15); color: var(--naranja);
+      margin-bottom: .8rem; font-size: 1.4rem;
+    }
+
+    /* CARTA */
     .carta-inner { text-align: center; max-width: 620px; margin-left: auto; margin-right: auto; }
     .carta-inner .section-lead { margin-left: auto; margin-right: auto; }
 
-    /* -------- GALERÍA -------- */
+    /* GALERÍA */
     .gallery { display: grid; grid-gap: 14px; grid-template-columns: repeat(2, 1fr); }
     .gallery-img { display: block; width: 100%; height: 100%; min-height: 150px; object-fit: cover; border-radius: var(--radio); }
 
-    /* -------- RESERVAS -------- */
+    /* BLOG */
+    .blog-grid {
+      display: grid; grid-gap: 18px;
+      grid-template-columns: 1fr; margin-top: 2rem;
+    }
+    .blog-card {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,.06);
+      border-radius: var(--radio);
+      overflow: hidden;
+      box-shadow: 0 12px 28px -20px rgba(0,0,0,.25);
+      transition: transform var(--transicion);
+    }
+    .blog-card:hover { transform: translateY(-3px); }
+    .blog-thumb {
+      width: 100%; min-height: 180px;
+      background: linear-gradient(135deg, rgba(242,104,28,.18), rgba(110,74,42,.35));
+      display: flex; align-items: center; justify-content: center;
+      color: var(--cafe); font-size: 2rem;
+    }
+    .blog-body { padding: 20px; }
+    .blog-tag { color: var(--naranja); font-weight: 600; font-size: .8rem; text-transform: uppercase; letter-spacing: .05em; }
+    .blog-title { font-size: 1.2rem; margin: .4rem 0 .5rem; }
+    .blog-excerpt { color: var(--texto-osc-2); font-size: .95rem; }
+
+    /* PREGUNTAS FRECUENTES (acordeón) */
+    .faq-wrap { max-width: 780px; margin: 2rem auto 0; }
+    .faq-item {
+      background: #fff;
+      border: 1px solid rgba(0,0,0,.08);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    .faq-question {
+      display: flex; justify-content: space-between; align-items: center;
+      width: 100%; padding: 18px 20px;
+      background: transparent; border: 0; cursor: pointer;
+      font-family: 'Fraunces', serif; font-weight: 900; font-size: 1.1rem;
+      color: var(--texto-osc); text-align: left;
+    }
+    .faq-question:hover { color: var(--naranja); }
+    .faq-icon {
+      flex: none; width: 24px; height: 24px; margin-left: 12px;
+      color: var(--naranja); font-size: 1.4rem; line-height: 1;
+      transition: transform var(--transicion);
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-answer {
+      max-height: 0; overflow: hidden;
+      transition: max-height .3s ease;
+      color: var(--texto-osc-2);
+    }
+    .faq-item.open .faq-answer { max-height: 320px; }
+    .faq-answer-inner { padding: 0 20px 18px; }
+
+    /* RESERVAS */
     .section-reservas { background: var(--hueso); }
     .reservas-grid { display: grid; grid-gap: 32px; grid-template-columns: 1fr; }
     .reservas-help { margin-top: 1rem; color: var(--texto-osc-2); }
@@ -212,12 +277,12 @@
     .form-feedback.ok { color: var(--verde); }
     .form-feedback.info { color: var(--cafe); }
 
-    /* -------- UBICACIÓN -------- */
+    /* UBICACIÓN */
     .ubicacion-grid { display: grid; grid-gap: 28px; grid-template-columns: 1fr; align-items: center; }
     .map-embed { border-radius: var(--radio); overflow: hidden; border: 1px solid var(--borde); }
     .map-embed iframe { width: 100%; height: 320px; border: 0; display: block; }
 
-    /* -------- FOOTER -------- */
+    /* FOOTER */
     .site-footer { background: var(--negro); color: var(--texto-claro); padding-top: 56px; }
     .footer-grid { display: grid; grid-gap: 32px; grid-template-columns: 1fr; padding-bottom: 40px; }
     .footer-brand .brand-name { color: #fff; font-size: 1.4rem; }
@@ -236,7 +301,7 @@
     .footer-bottom { border-top: 1px solid var(--borde); padding-top: 20px; padding-bottom: 20px; }
     .footer-bottom p { color: var(--texto-tenue); font-size: .85rem; text-align: center; }
 
-    /* -------- BOTONES FLOTANTES -------- */
+    /* BOTONES FLOTANTES */
     .reservar-float {
       position: fixed; left: 18px; bottom: 18px; z-index: 60;
       display: inline-flex; align-items: center;
@@ -253,7 +318,7 @@
       background: #25D366; color: #fff; border-radius: 50%; box-shadow: 0 10px 24px -6px rgba(0,0,0,.5);
     }
 
-    /* -------- RESPONSIVE (tablet en adelante) -------- */
+    /* RESPONSIVE */
     @media (min-width: 768px) {
       .section { padding-top: 96px; padding-bottom: 96px; }
       .nav-toggle { display: none; }
@@ -261,13 +326,15 @@
         position: static; -webkit-transform: none; transform: none;
         flex-direction: row; align-items: center; background: transparent; border: 0; padding: 0;
       }
-      .nav-menu a { margin-left: 26px; padding: 0; }
+      .nav-menu a { margin-left: 22px; padding: 0; }
       .hero-grid { grid-template-columns: 1.05fr .95fr; grid-gap: 48px; padding-top: 120px; padding-bottom: 96px; }
       .hero-photo { min-height: 420px; }
       .historia-grid { grid-template-columns: 1.1fr .9fr; align-items: center; }
+      .vista-cards { grid-template-columns: 1fr 1fr; }
       .ubicacion-grid { grid-template-columns: 1fr 1.2fr; }
       .gallery { grid-template-columns: repeat(3, 1fr); grid-gap: 16px; }
       .gallery-img { min-height: 200px; }
+      .blog-grid { grid-template-columns: repeat(3, 1fr); }
       .reservas-grid { grid-template-columns: .9fr 1.1fr; align-items: start; }
       .field-row { grid-template-columns: 1fr 1fr 1fr; }
       .footer-grid { grid-template-columns: 1.4fr 1fr 1fr; }
@@ -279,7 +346,7 @@
 
 <body>
 
-  <!-- 1. HEADER / NAV -->
+  <!-- HEADER -->
   <header class="site-header" id="inicio">
     <div class="container nav-bar">
       <a href="#inicio" class="brand" aria-label="Vista al Vuelo, ir al inicio">
@@ -293,9 +360,10 @@
       </button>
       <nav class="nav-menu" id="navMenu">
         <a href="#historia">Historia</a>
-        <!-- "Carta" ahora abre el PDF directo (antes bajaba a la sección) -->
         <a href="img/carta.pdf" target="_blank" rel="noopener">Carta</a>
         <a href="#galeria">Lugar</a>
+        <a href="#blog">Blog</a>
+        <a href="#faq">FAQ</a>
         <a href="#ubicacion">Ubicación</a>
       </nav>
     </div>
@@ -303,59 +371,77 @@
 
   <main>
 
-    <!-- 2. HERO -->
+    <!-- HERO -->
     <section class="hero">
       <div class="hero-overlay"></div>
       <div class="container hero-grid">
         <div class="hero-content">
-          <!-- Logo (img/logo.png) -->
           <img class="hero-logo-img" src="img/logo.png" alt="Vista al Vuelo" />
-
-          <p class="hero-kicker">Uno de los primeros miradores de la zona</p>
-          <h1 class="hero-title">La mejor vista de San Félix</h1>
+          <p class="hero-kicker">El mirador de Medellín</p>
+          <h1 class="hero-title">Vista al Vuelo, el mirador de Medellín donde el atardecer se vive en grande</h1>
           <p class="hero-sub">
             Más de 35 años recibiéndote con buena comida, buena música y el
             paisaje que enamora. Sube, respira y quédate a ver el atardecer.
           </p>
           <div class="hero-actions">
-            <!-- "Ver la carta" ahora abre el PDF directo (antes bajaba a la sección) -->
             <a href="img/carta.pdf" target="_blank" rel="noopener" class="btn btn-outline">Ver la carta</a>
           </div>
         </div>
-
-        <!-- Foto lateral (img/hero-lateral.jpg) -->
         <img class="hero-photo" src="img/hero-lateral.jpg" alt="Vista panorámica desde el mirador Vista al Vuelo" />
       </div>
     </section>
 
-    <!-- 3. HISTORIA -->
+    <!-- HISTORIA -->
     <section class="section section-light" id="historia">
       <div class="container historia-grid">
         <div class="historia-text">
-          <p class="kicker">Nuestra historia</p>
-          <h2 class="section-title">35 años cuidando la vista</h2>
+          <p class="kicker">Nuestro lugar</p>
+          <h2 class="section-title">Un mirador para compartir con los que más quieres</h2>
           <p>
-            Somos uno de los primeros miradores de San Félix, con más de 35 años
-            de trayectoria dándote la mejor vista. Cuidamos los detalles en cada
-            espacio y conservamos la esencia de la naturaleza.
+            En Vista al Vuelo creamos un espacio para que respires, te diviertas
+            y te relajes. Vienes en familia, con amigos o con tu pareja, y aquí
+            todos tienen su lugar: los niños corren por las zonas verdes y los
+            amigos peludos también son bienvenidos.
           </p>
           <p>
-            Acompañamos cada visita con buena música y buena comida, para que
-            disfrutes del lugar de la mejor manera.
+            No importa si es un almuerzo de domingo, una tarde de amigos o una
+            cita especial. La vista, la música y la buena mesa se encargan del resto.
           </p>
-          <ul class="historia-features">
-            <li><span class="dot"></span> Vista panorámica del valle</li>
-            <li><span class="dot"></span> Zona verde amplia y arbolada</li>
-            <li><span class="dot"></span> Salón cerrado para eventos</li>
-          </ul>
         </div>
-        <!-- Foto historia (img/historia.jpg) -->
         <img class="media-img" src="img/historia.jpg" alt="Espacio del mirador con vista al valle" />
       </div>
     </section>
 
-    <!-- 4. CARTA -->
-    <section class="section section-dark" id="carta">
+    <!-- LA MEJOR VISTA (con tarjetas) -->
+    <section class="section section-dark">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker kicker-orange">La vista</p>
+          <h2 class="section-title">La mejor vista del norte de Medellín</h2>
+          <p class="section-lead">
+            Desde nuestro mirador tienes una panorámica abierta de montañas y
+            ciudad que cambia de color con cada hora del día. En la mañana, aire
+            fresco y cielo despejado. En la tarde, parapentes cruzando el
+            horizonte. Y al caer el sol, uno de los atardeceres más bonitos de Medellín.
+          </p>
+        </div>
+        <div class="vista-cards">
+          <div class="card">
+            <div class="card-icon">🌳</div>
+            <h3>Zonas verdes y un amplio mirador</h3>
+            <p>Un gran prado rodeado de árboles, perfecto para extender la tarde, jugar con los niños o simplemente sentarte a mirar lejos.</p>
+          </div>
+          <div class="card">
+            <div class="card-icon">🏠</div>
+            <h3>Un salón para cuando el clima cambie</h3>
+            <p>Si llueve o refresca, nuestro salón cubierto te permite seguir disfrutando sin perder el plan.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CARTA -->
+    <section class="section section-light" id="carta">
       <div class="container carta-inner">
         <p class="kicker kicker-orange">Para comer y brindar</p>
         <h2 class="section-title">Nuestra carta</h2>
@@ -363,19 +449,17 @@
           Platos para compartir, cócteles de la casa y algo dulce para cerrar.
           Mira la carta completa antes de subir.
         </p>
-        <!-- Abre el PDF de la carta -->
         <a href="img/carta.pdf" target="_blank" rel="noopener" class="btn btn-primary btn-lg">Ver la carta completa</a>
       </div>
     </section>
 
-    <!-- 5. GALERÍA / LUGAR -->
-    <section class="section section-light" id="galeria">
+    <!-- GALERÍA / LUGAR -->
+    <section class="section section-dark" id="galeria">
       <div class="container">
         <div class="section-head">
-          <p class="kicker">El lugar</p>
+          <p class="kicker kicker-orange">El lugar</p>
           <h2 class="section-title">Cada rincón está pensado para quedarse</h2>
         </div>
-        <!-- Fotos galería (img/galeria-1.jpg ... galeria-6.jpg) -->
         <div class="gallery">
           <img class="gallery-img" src="img/galeria-1.jpg" alt="El lugar, foto 1" />
           <img class="gallery-img" src="img/galeria-2.jpg" alt="El lugar, foto 2" />
@@ -387,7 +471,119 @@
       </div>
     </section>
 
-    <!-- 6. RESERVAS -->
+    <!-- BLOG (maqueta, cambia los textos por tus notas reales cuando quieras) -->
+    <section class="section section-light" id="blog">
+      <div class="container">
+        <div class="section-head">
+          <p class="kicker">Historias del mirador</p>
+          <h2 class="section-title">Blog</h2>
+          <p class="section-lead">Consejos para tu visita, planes según el clima y las historias que solo pasan aquí arriba.</p>
+        </div>
+        <div class="blog-grid">
+          <article class="blog-card">
+            <div class="blog-thumb">📷</div>
+            <div class="blog-body">
+              <span class="blog-tag">Próximamente</span>
+              <h3 class="blog-title">La mejor hora para ver el atardecer</h3>
+              <p class="blog-excerpt">Cuál es el momento exacto en el que el cielo se pinta de naranja.</p>
+            </div>
+          </article>
+          <article class="blog-card">
+            <div class="blog-thumb">📷</div>
+            <div class="blog-body">
+              <span class="blog-tag">Próximamente</span>
+              <h3 class="blog-title">Planes con niños en el mirador</h3>
+              <p class="blog-excerpt">Ideas para que los peques disfruten tanto como los adultos.</p>
+            </div>
+          </article>
+          <article class="blog-card">
+            <div class="blog-thumb">📷</div>
+            <div class="blog-body">
+              <span class="blog-tag">Próximamente</span>
+              <h3 class="blog-title">Cómo llegar sin perderte</h3>
+              <p class="blog-excerpt">La ruta más fácil desde Medellín y qué ver en el camino.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- PREGUNTAS FRECUENTES -->
+    <section class="section section-dark" id="faq">
+      <div class="container">
+        <div class="section-head" style="text-align:center;">
+          <p class="kicker kicker-orange">Antes de subir</p>
+          <h2 class="section-title">Preguntas frecuentes</h2>
+        </div>
+        <div class="faq-wrap">
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>¿Dónde queda Vista al Vuelo?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Estamos en [PENDIENTE: dirección exacta], entre Bello y San Pedro de los Milagros,
+                a [PENDIENTE: X] minutos de Medellín.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>¿Cuál es el horario?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Abrimos [PENDIENTE: días y horas]. Te recomendamos llegar antes de
+                las [PENDIENTE: hora] para ver el atardecer completo.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>¿Se puede ir con mascotas?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Sí. Somos pet friendly y tus amigos peludos son bienvenidos.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>¿Es un buen plan con niños?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Sí. Tenemos amplias zonas verdes, espacio para jugar y opciones de comida para ellos.
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              <span>¿Hay que reservar?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                Para grupos y fechas especiales, sí. Escríbenos por WhatsApp y te confirmamos disponibilidad.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- RESERVAS -->
     <section class="section section-light section-reservas" id="reservas">
       <div class="container reservas-grid">
         <div class="reservas-intro">
@@ -439,7 +635,7 @@
       </div>
     </section>
 
-    <!-- 7. UBICACIÓN -->
+    <!-- UBICACIÓN -->
     <section class="section section-dark" id="ubicacion">
       <div class="container ubicacion-grid">
         <div class="ubicacion-text">
@@ -448,7 +644,6 @@
           <p class="section-lead">San Félix, Bello — Antioquia, Colombia.</p>
           <a href="https://www.google.com/maps?q=San+F%C3%A9lix,+Bello,+Antioquia" target="_blank" rel="noopener" class="btn btn-outline">Abrir en Google Maps</a>
         </div>
-        <!-- REEMPLAZAR por tu iframe real de Google Maps (Compartir > Insertar un mapa) -->
         <div class="map-embed">
           <iframe
             title="Ubicación de Vista al Vuelo"
@@ -462,7 +657,7 @@
 
   </main>
 
-  <!-- 8. FOOTER / REDES -->
+  <!-- FOOTER -->
   <footer class="site-footer">
     <div class="container footer-grid">
       <div class="footer-brand">
@@ -472,24 +667,27 @@
       <div class="footer-social">
         <p class="footer-heading">Síguenos</p>
         <div class="social-icons">
-          <!-- REEMPLAZAR los href="#" por los links reales de tus redes -->
-          <a href="#" aria-label="Instagram" target="_blank" rel="noopener">
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/vistaalvuelosanfelix" aria-label="Instagram" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 2.2c3.2 0 3.6 0 4.9.07 1.2.05 1.8.25 2.2.42.6.22 1 .48 1.4.9.42.4.68.8.9 1.4.17.4.37 1 .42 2.2.06 1.3.07 1.7.07 4.9s0 3.6-.07 4.9c-.05 1.2-.25 1.8-.42 2.2-.22.6-.48 1-.9 1.4-.4.42-.8.68-1.4.9-.4.17-1 .37-2.2.42-1.3.06-1.7.07-4.9.07s-3.6 0-4.9-.07c-1.2-.05-1.8-.25-2.2-.42-.6-.22-1-.48-1.4-.9-.42-.4-.68-.8-.9-1.4-.17-.4-.37-1-.42-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.07-4.9c.05-1.2.25-1.8.42-2.2.22-.6.48-1 .9-1.4.4-.42.8-.68 1.4-.9.4-.17 1-.37 2.2-.42C8.4 2.2 8.8 2.2 12 2.2Zm0 4.85A4.95 4.95 0 1 0 12 17a4.95 4.95 0 0 0 0-9.95Zm0 1.8a3.15 3.15 0 1 1 0 6.3 3.15 3.15 0 0 1 0-6.3Zm5.15-3.2a1.15 1.15 0 1 1 0 2.3 1.15 1.15 0 0 1 0-2.3Z"/></svg>
           </a>
-          <a href="#" class="js-whatsapp" aria-label="WhatsApp" target="_blank" rel="noopener">
+          <!-- WhatsApp (mismo link del flotante) -->
+          <a href="https://wa.me/message/UOFPKISRPHP3N1" aria-label="WhatsApp" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M17.5 14.4c-.3-.15-1.7-.85-2-.95-.27-.1-.47-.15-.66.15-.2.3-.76.95-.93 1.14-.17.2-.34.22-.63.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.34.44-.5.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.66-1.6-.9-2.18-.24-.57-.48-.5-.66-.5l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.1 4.49.71.3 1.27.49 1.7.63.72.23 1.37.2 1.88.12.57-.08 1.7-.7 1.95-1.37.24-.67.24-1.25.17-1.37-.07-.12-.27-.2-.57-.34ZM12 2.5a9.5 9.5 0 0 0-8.1 14.4L2.5 21.5l4.7-1.36A9.5 9.5 0 1 0 12 2.5Zm0 1.8a7.7 7.7 0 0 1 6.53 11.8l-.18.29.62 2.27-2.33-.61-.28.16A7.7 7.7 0 1 1 12 4.3Z"/></svg>
           </a>
+          <!-- Facebook -->
           <a href="#" aria-label="Facebook" target="_blank" rel="noopener">
+            <!-- PENDIENTE: cambia href="#" por el link real de Facebook -->
             <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M13.5 21v-8h2.7l.4-3.1h-3.1V7.9c0-.9.25-1.5 1.55-1.5H17V3.6c-.3-.04-1.3-.13-2.47-.13-2.44 0-4.11 1.49-4.11 4.23v2.36H7.7V13h2.72v8h3.08Z"/></svg>
           </a>
-          <a href="#" aria-label="TikTok" target="_blank" rel="noopener">
+          <!-- TikTok -->
+          <a href="https://www.tiktok.com/@vista.al.vuelo" aria-label="TikTok" target="_blank" rel="noopener">
             <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M16.6 5.8c-.9-.6-1.5-1.5-1.7-2.6h-2.6v11.2c0 1.3-1.05 2.4-2.35 2.4a2.35 2.35 0 0 1 0-4.7c.24 0 .47.03.7.1V9.5a5 5 0 0 0-.7-.05 5 5 0 1 0 5 5V8.9c1 .72 2.2 1.14 3.5 1.14V7.4c-.7 0-1.35-.2-1.9-.55l-.05-.05Z"/></svg>
           </a>
         </div>
       </div>
       <div class="footer-contact">
         <p class="footer-heading">Contacto</p>
-        <!-- REEMPLAZAR por tu correo y teléfono reales -->
         <p><a href="mailto:equipomarketing94@gmail.com">equipomarketing94@gmail.com</a></p>
         <p>San Félix, Bello — Antioquia</p>
       </div>
@@ -501,23 +699,24 @@
     </div>
   </footer>
 
-  <!-- Botón flotante RESERVAR (naranja, abajo a la izquierda) -> baja a #reservas -->
+  <!-- Botón flotante RESERVAR -->
   <a href="#reservas" class="reservar-float" aria-label="Reservar tu mesa">
     <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2"></rect><path d="M3 9h18M8 2.5v4M16 2.5v4"></path></svg>
     <span>Reservar</span>
   </a>
 
-  <!-- Botón flotante WhatsApp (verde, abajo a la derecha) -->
-  <a href="#" class="whatsapp-float js-whatsapp" aria-label="Escríbenos por WhatsApp" target="_blank" rel="noopener">
+  <!-- Botón flotante WhatsApp -->
+  <a href="https://wa.me/message/UOFPKISRPHP3N1" class="whatsapp-float js-whatsapp" aria-label="Escríbenos por WhatsApp" target="_blank" rel="noopener">
     <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor"><path d="M17.5 14.4c-.3-.15-1.7-.85-2-.95-.27-.1-.47-.15-.66.15-.2.3-.76.95-.93 1.14-.17.2-.34.22-.63.07-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.64-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.34.44-.5.15-.18.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.66-1.6-.9-2.18-.24-.57-.48-.5-.66-.5l-.57-.01c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.1 4.49.71.3 1.27.49 1.7.63.72.23 1.37.2 1.88.12.57-.08 1.7-.7 1.95-1.37.24-.67.24-1.25.17-1.37-.07-.12-.27-.2-.57-.34ZM12 2.5a9.5 9.5 0 0 0-8.1 14.4L2.5 21.5l4.7-1.36A9.5 9.5 0 1 0 12 2.5Z"/></svg>
   </a>
 
   <script>
-    /* -------- CONFIGURACIÓN (cambia el número aquí una sola vez) -------- */
-    var WHATSAPP_NUMBER = "573000000000"; // REEMPLAZAR (57 + número, sin + ni espacios)
-    var WHATSAPP_MENSAJE = "¡Hola! Quiero hacer una reserva en Vista al Vuelo.";
+    /* Link único de WhatsApp para todos los botones que lo usen */
+    var WHATSAPP_LINK = "https://wa.me/message/UOFPKISRPHP3N1";
 
     document.addEventListener("DOMContentLoaded", function () {
+
+      /* Menú móvil */
       var navToggle = document.getElementById("navToggle");
       var navMenu = document.getElementById("navMenu");
       navToggle.addEventListener("click", function () {
@@ -534,25 +733,37 @@
         });
       });
 
+      /* Sombra del header al hacer scroll */
       var header = document.querySelector(".site-header");
       function onScroll() { header.classList.toggle("scrolled", window.scrollY > 20); }
       window.addEventListener("scroll", onScroll);
       onScroll();
 
-      var whatsappURL = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(WHATSAPP_MENSAJE);
+      /* WhatsApp: pega el link en todos los elementos .js-whatsapp */
       document.querySelectorAll(".js-whatsapp").forEach(function (el) {
-        el.setAttribute("href", whatsappURL);
+        el.setAttribute("href", WHATSAPP_LINK);
       });
 
+      /* Acordeón de FAQ */
+      document.querySelectorAll(".faq-item").forEach(function (item) {
+        var btn = item.querySelector(".faq-question");
+        btn.addEventListener("click", function () {
+          var abierto = item.classList.toggle("open");
+          btn.setAttribute("aria-expanded", abierto ? "true" : "false");
+        });
+      });
+
+      /* Formulario (Fase 1: aún no envía. Fase 2: conectamos a Google) */
       var form = document.getElementById("reservaForm");
       var feedback = document.getElementById("formFeedback");
       form.addEventListener("submit", function (e) {
         e.preventDefault();
         if (!form.checkValidity()) { form.reportValidity(); return; }
-        feedback.textContent = "¡Gracias! El envío automático se activa en la Fase 2. Por ahora, reserva por WhatsApp 👉";
+        feedback.textContent = "¡Gracias! Pronto activamos el envío automático. Por ahora, reserva por WhatsApp 👉";
         feedback.className = "form-feedback info";
       });
 
+      /* Año automático */
       var year = document.getElementById("year");
       if (year) year.textContent = new Date().getFullYear();
     });
